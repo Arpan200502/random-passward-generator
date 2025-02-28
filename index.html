@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+        h1 {
+            color: #333;
+        }
+        h2 {
+            color: #555;
+        }
+        input {
+            margin: 10px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Made by Python</h1>
+    <div class="container">
+        <h2>PyPassword Generator</h2>
+        <label>Letters: <input type="number" id="letters" min="0" value="4"></label><br>
+        <label>Symbols: <input type="number" id="symbols" min="0" value="2"></label><br>
+        <label>Numbers: <input type="number" id="numbers" min="0" value="2"></label><br>
+        <button onclick="generatePassword()">Generate Password</button>
+        <h3 id="result"></h3>
+    </div>
+
+    <script>
+        function generatePassword() {
+            const letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            const numbers = '0123456789';
+            const symbols = '!#$%&()*+';
+            
+            let nrLetters = parseInt(document.getElementById('letters').value);
+            let nrSymbols = parseInt(document.getElementById('symbols').value);
+            let nrNumbers = parseInt(document.getElementById('numbers').value);
+            
+            let password = '';
+            
+            for (let i = 0; i < nrLetters; i++) {
+                password += letters[Math.floor(Math.random() * letters.length)];
+            }
+            for (let i = 0; i < nrSymbols; i++) {
+                password += symbols[Math.floor(Math.random() * symbols.length)];
+            }
+            for (let i = 0; i < nrNumbers; i++) {
+                password += numbers[Math.floor(Math.random() * numbers.length)];
+            }
+            
+            let passwordArray = password.split('');
+            passwordArray.sort(() => Math.random() - 0.5);
+            let finalPassword = passwordArray.join('');
+            
+            document.getElementById('result').textContent = `Generated Password: ${finalPassword}`;
+        }
+    </script>
+</body>
+</html>
